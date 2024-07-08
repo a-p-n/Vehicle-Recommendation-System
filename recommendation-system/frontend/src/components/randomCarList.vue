@@ -9,6 +9,17 @@
           </li>
         </ul>
       </div>
+
+      <div>
+      <h2>Recommended Cars</h2>
+      <ul class="comp-ul" v-if="recommendations.length > 0">
+        <li class="comp" v-for="recommendation in recommendations" :key="recommendation.id">
+          <img :src="recommendation.PHOTO" alt="Car Photo" />
+          {{ recommendation.MAKE }} {{ recommendation.MODEL }} ({{ recommendation.YEAR }})
+        </li>
+      </ul>
+    </div>
+    
     </div>
   </template>
   
@@ -19,6 +30,7 @@
     data() {
       return {
         randomCars: [],
+        recommendations: [],
       };
     },
     mounted() {
@@ -36,9 +48,14 @@
       },
       selectCar(carId) {
         axios.post('http://localhost:8000/select-car/', { id: carId })
-          .then(response => {
-            console.log('Car selected:', response.data);
-          })
+        .then(response => {
+            console.log('Response:', response.data); 
+          if (response.data.status === 'success') {
+            this.recommendations = response.data.recommendations;
+          } else {
+            console.error('Error:', response.data.message);
+          }
+        })
           .catch(error => {
             console.error('Error selecting car:', error);
           });
