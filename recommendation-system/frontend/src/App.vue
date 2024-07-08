@@ -16,4 +16,12 @@ export default {
 </script>
 
 <style>
+  body {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
 </style>

@@ -6,12 +6,13 @@ class Command(BaseCommand):
     help = 'Load cars from CSV file'
 
     def handle(self, *args, **options):
-        with open('../../../car.csv', 'r') as file:
+        with open('../../cars.csv', 'r') as file:
             reader = csv.DictReader(file)
             for row in reader:
                 if row['CONSUMER_RATING']:
                     consumer_rating = float(row['CONSUMER_RATING'])
                     Car.objects.create(
+                        id=row['ID'],
                         name=row['NAME'],
                         make=row['MAKE'],
                         model=row['MODEL'],
